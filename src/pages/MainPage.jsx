@@ -1,10 +1,20 @@
-import React from 'react'
-import { BookList } from '../Components'
+import React from 'react';
+import { BookList, CartItems } from '../Components';
+import Header from '../Components/Header/Header';
+import classes from './header.module.scss';
 
 const MainPage = () => {
   return (
-    <div><BookList/></div>
-  )
-}
+    <>
+      <header>
+        <Header />
+      </header>
+      <main role="main" className="container">
+        <BookList />
+      </main>
+      <CartItems/>
+    </>
+  );
+};
 
-export default MainPage
+export default MainPage;

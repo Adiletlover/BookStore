@@ -38,6 +38,27 @@
       "author": "Adilet Zhusupov",
       "price": 20,
       "imgUrl": "public/book.png"
+    },
+    {
+      "id": 6,
+      "title": "My lost Ephemeris",
+      "author": "Adilet Zhusupov",
+      "price": 25,
+      "imgUrl": "public/ephemeris.png"
+    },
+    {
+      "id": 7,
+      "title": "Martin Eden",
+      "author": "Jack London",
+      "price": 24,
+      "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEfl9ayxEnERTjP1LJG3PTfa6eTSB0MTCqzA&usqp=CAU.jpg"
+    },
+    {
+      "id": 8,
+      "title": "Shrek",
+      "author": "Adilet Zhusupov",
+      "price": 24,
+      "imgUrl": "public/shrekInTheFuture.png"
     }
   ],
   "cartItems": []

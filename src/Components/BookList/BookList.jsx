@@ -19,9 +19,7 @@ const BookList = () => {
       {booksLoading ? <Loader/> : booksError ? booksError : null}
       {books.length
         ? books.map((el) => {
-          console.log(el.title);
-          // return <div key={el.id}>{el.title}</div>
-            return <BookListItem id={el.id} title={el.title} imgUrl={el.imgUrl} author={el.author} price={el.price}/>
+            return <BookListItem key={el.id} id={el.id} title={el.title} imgUrl={el.imgUrl} author={el.author} price={el.price}/>
           })
         : null}
     </div>
