@@ -1,27 +1,45 @@
+import { message } from 'antd';
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchBooks from '../../store/actions/books';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import fetchCarts from '../../store/actions/cartItems';
 import Loader from '../Loader/Loader';
 import BookListItem from './BookListItem';
-
-
 
 const BookList = () => {
   const { books, booksLoading, booksError } = useSelector((state) => state.booksReducer);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchBooks());
+    dispatch(fetchCarts());
   }, []);
+
+  useEffect(() => {
+    if (booksError) {
+      message.error(booksError, 7);
+    }
+  }, [booksError]);
+  console.log(booksError);
   return (
     <div>
-      {booksLoading ? <Loader/> : booksError ? booksError : null}
-      {books.length
-        ? books.map((el) => {
-            return <BookListItem key={el.id} id={el.id} title={el.title} imgUrl={el.imgUrl} author={el.author} price={el.price}/>
-          })
-        : null}
+      {booksLoading ? (
+        <Loader />
+      ) : (
+        books?.map((el) => {
+          return (
+            <BookListItem
+              key={el.id}
+              id={el.id}
+              title={el.title}
+              imgUrl={el.imgUrl}
+              author={el.author}
+              price={el.price}
+            />
+          );
+        })
+      )}
     </div>
   );
 };

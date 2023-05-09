@@ -1,9 +1,14 @@
 import { Nav } from 'react-bootstrap';
 import classes from './styles.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsOpen } from '../../store/reducers/cartItems';
 
 const Header = () => {
-  const { books } = useSelector((state) => state.booksReducer);
+  const { items } = useSelector((state) => state.cartReducer);
+  const dispatch = useDispatch()
+
+  const onOpenHandle = () => dispatch(setIsOpen(true))
+
   return (
     <div>
       <Nav activeKey="/" className="justify-content-between container">
@@ -12,9 +17,9 @@ const Header = () => {
             Book Store
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item className="d-flex align-items-center">
+        <Nav.Item className="d-flex align-items-center" onClick={onOpenHandle}>
           <div className={classes.icon}>
-            {books.length && <div className={classes.iconAlert}>{books.length}</div>}
+            {<div className={classes.iconAlert}>{items.length}</div>}
             <box-icon name="cart" size="40px" color={'white'}></box-icon>
           </div>
         </Nav.Item>

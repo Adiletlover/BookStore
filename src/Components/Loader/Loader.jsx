@@ -1,8 +1,9 @@
 import React from 'react'
-import '../../styles.css'
+import classes from './styles.module.scss'
+
 const Loader = () => {
   return (
-    <div className='loader'></div>
+    <div className={classes.loader}></div>
   )
 }
 

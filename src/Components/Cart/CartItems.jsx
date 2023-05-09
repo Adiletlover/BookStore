@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
-
-const item = [
-  { id: '1', total: 30, title: 'Hello', count: 1 },
-  { id: '2', total: 30, title: 'Hello', count: 1 },
-  { id: '3', total: 30, title: 'Hello', count: 1 },
-  { id: '4', total: 30, title: 'Hello', count: 1 },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsOpen } from '../../store/reducers/cartItems';
+import Loader from '../Loader/Loader';
+import classes from './styles.module.scss';
 
 const CartItems = () => {
+  const { items, isItemLoading, isItemError } = useSelector((state) => state.cartReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => (document.body.style.overflow = 'auto');
+  }, []);
+
   const renderItmes = (el, idx) => {
     const { title, count, total, id } = el;
     return (
@@ -18,13 +23,13 @@ const CartItems = () => {
         <td>{count}</td>
         <td>{total}</td>
         <td>
-          <Button variant="outline-success mx-1">
+          <Button variant="outline-success my-1">
             <box-icon type="solid" name="plus-circle"></box-icon>
           </Button>
-          <Button variant="outline-warning mx-1">
+          <Button variant="outline-warning my-1">
             <box-icon type="solid" name="minus-circle"></box-icon>
           </Button>
-          <Button variant="outline-danger mx-1">
+          <Button variant="outline-danger my-1">
             <box-icon name="trash"></box-icon>
           </Button>
         </td>
@@ -32,21 +37,33 @@ const CartItems = () => {
     );
   };
   return (
-    <div>
-      <h2>Your Order (Cart)</h2>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>№</th>
-            <th>Item</th>
-            <th>Count</th>
-            <th>Price</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>{item.map(renderItmes)}</tbody>
-      </Table>
-    </div>
+    <>
+      <div onClick={() => dispatch(setIsOpen(false))} className={classes.layout}>
+        <aside className={classes.aside}>
+          <h2>Your Order (Cart)</h2>
+          {isItemError && isItemError}
+
+          {isItemLoading ? (
+            <Loader />
+          ) : !isItemError && !isItemLoading && items.length === 0 ? (
+            <div className={classes.alert}>Nothing</div>
+          ) : (
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Item</th>
+                  <th>Count</th>
+                  <th>Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>{items.map(renderItmes)}</tbody>
+            </Table>
+          )}
+        </aside>
+      </div>
+    </>
   );
 };
 

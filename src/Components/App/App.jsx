@@ -1,9 +1,8 @@
-import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { MainPage } from "../../pages"
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary"
-import Header from "../Header/Header"
+import "bootstrap/dist/css/bootstrap.min.css"
 import 'boxicons'
+import "antd/dist/reset.css"
+import { MainPage } from "../../pages"
 
 const App = () => {
   return (
